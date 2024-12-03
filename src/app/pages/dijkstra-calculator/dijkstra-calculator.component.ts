@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DijkstraService } from '../../services/dijkstra.service';
 
 @Component({
   selector: 'app-dijkstra-calculator',
@@ -11,7 +12,9 @@ export class DijkstraCalculatorComponent {
   nodes: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G']; // Example nodes
   result: { fromNode: string; toNode: string; path: string[]; distance: number } | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    public apiService: DijkstraService,) {
     this.dijkstraForm = this.fb.group({
       fromNode: ['', Validators.required],
       toNode: ['', Validators.required],
@@ -30,6 +33,16 @@ export class DijkstraCalculatorComponent {
         path: [fromNode, 'B', 'C', toNode], // Example path
         distance: 10, // Example distance
       };
+      //call api service
+      this.apiService.getPath().subscribe((res) => {
+        if (res) {
+
+        }
+      },(err:any)=>{
+        alert("Eror");
+      }
+      );
+
     }
   }
 
