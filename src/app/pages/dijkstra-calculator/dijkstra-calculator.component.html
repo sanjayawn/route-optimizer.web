@@ -1,0 +1,42 @@
+<div class="container py-4">
+  <h2 class="text-center">Dijkstra’s Algorithm Calculator</h2>
+  <p class="text-center">
+    Discovering Optimal Routes Through Nodes Using Dijkstra's Method
+  </p>
+  <div class="row justify-content-center">
+    <div class="col-md-6 card p-4">
+      <form [formGroup]="dijkstraForm" (ngSubmit)="calculatePath()">
+        <div class="mb-3">
+          <label for="fromNode" class="form-label">From Node</label>
+          <select id="fromNode" class="form-select" formControlName="fromNode">
+            <option *ngFor="let node of nodes" [value]="node">{{ node }}</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="toNode" class="form-label">To Node</label>
+          <select id="toNode" class="form-select" formControlName="toNode">
+            <option *ngFor="let node of nodes" [value]="node">{{ node }}</option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-secondary" (click)="resetForm()">Clear</button>
+          <button type="submit" class="btn btn-primary" [disabled]="dijkstraForm.invalid">
+            <i class="bi bi-calculator"></i> Calculate
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <div class="result-box card p-4">
+        <h5>Result</h5>
+        <p *ngIf="result">
+          From Node: {{ result.fromNode }}<br />
+          To Node: {{ result.toNode }}<br />
+          Path: {{ result.path.join(', ') }}<br />
+          Total Distance: {{ result.distance }}
+        </p>
+        <p *ngIf="!result" class="text-muted">No result to display.</p>
+      </div>
+    </div>
+  </div>
+</div>
