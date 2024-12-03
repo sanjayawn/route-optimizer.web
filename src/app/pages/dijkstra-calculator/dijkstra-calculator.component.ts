@@ -34,14 +34,23 @@ export class DijkstraCalculatorComponent {
       //   distance: 10, // Example distance
       // };
       //call api service
-      this.apiService.getPath().subscribe((res) => {
+      // this.apiService.getPath().subscribe((res) => {
+      //   if (res) {
+      //     console.log(res);
+      //   }
+      // },(err:any)=>{
+      //   alert("Eror");
+      // }
+      // );
+
+      this.apiService.getShortestPath(fromNode, toNode)
+      .subscribe((res) => {
         if (res) {
           console.log(res);
         }
       },(err:any)=>{
         alert("Eror");
-      }
-      );
+      });
 
     }
   }
