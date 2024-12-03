@@ -25,18 +25,18 @@ export class DijkstraCalculatorComponent {
     if (this.dijkstraForm.valid) {
       const { fromNode, toNode } = this.dijkstraForm.value;
 
-      // Simulating Dijkstra's algorithm result
-      // Replace this logic with actual algorithm computation
-      this.result = {
-        fromNode,
-        toNode,
-        path: [fromNode, 'B', 'C', toNode], // Example path
-        distance: 10, // Example distance
-      };
+      // // Simulating Dijkstra's algorithm result
+      // // Replace this logic with actual algorithm computation
+      // this.result = {
+      //   fromNode,
+      //   toNode,
+      //   path: [fromNode, 'B', 'C', toNode], // Example path
+      //   distance: 10, // Example distance
+      // };
       //call api service
       this.apiService.getPath().subscribe((res) => {
         if (res) {
-
+          console.log(res);
         }
       },(err:any)=>{
         alert("Eror");
