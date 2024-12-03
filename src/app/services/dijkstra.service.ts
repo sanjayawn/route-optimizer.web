@@ -14,7 +14,7 @@ constructor(private http: HttpClient) { }
 
  // GET request to fetch data from API
  getPath(): Observable<any> {
-  return this.http.get<any>(`${this.apiUrl}/dijkstra`);
+  return this.http.get<any>(`${this.apiUrl}dijkstra`);
 }
 
 }
