@@ -8,6 +8,7 @@ import { DijkstraService } from '../../services/dijkstra.service';
   styleUrls: ['./dijkstra-calculator.component.css']
 })
 export class DijkstraCalculatorComponent {
+  response: any;
   dijkstraForm: FormGroup;
   nodes: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G']; // Example nodes
   result: { fromNode: string; toNode: string; path: string[]; distance: number } | null = null;
@@ -25,32 +26,26 @@ export class DijkstraCalculatorComponent {
     if (this.dijkstraForm.valid) {
       const { fromNode, toNode } = this.dijkstraForm.value;
 
-      // // Simulating Dijkstra's algorithm result
-      // // Replace this logic with actual algorithm computation
-      // this.result = {
-      //   fromNode,
-      //   toNode,
-      //   path: [fromNode, 'B', 'C', toNode], // Example path
-      //   distance: 10, // Example distance
-      // };
-      //call api service
-      // this.apiService.getPath().subscribe((res) => {
-      //   if (res) {
-      //     console.log(res);
-      //   }
-      // },(err:any)=>{
-      //   alert("Eror");
-      // }
-      // );
+      const payload = {
+        From: this.dijkstraForm.value.fromNode,
+        To: this.dijkstraForm.value.toNode
+      };
 
-      this.apiService.getShortestPath(fromNode, toNode)
-      .subscribe((res) => {
-        if (res) {
-          console.log(res);
+      this.apiService.GetShortestPath(payload).subscribe(
+        data => {
+          console.log('Response:', data);
+          this.response = data;
+      this.result = {
+        fromNode,
+        toNode,
+        path: this.response.data.nodeNames,
+        distance: this.response.data.distance,
+      };
+        },
+        error => {
+          console.error('Error:', error);
         }
-      },(err:any)=>{
-        alert("Eror");
-      });
+      );
 
     }
   }

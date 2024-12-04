@@ -12,17 +12,12 @@ private apiUrl=environment.apiUrl;
 
 constructor(private http: HttpClient) { }
 
- // GET request to fetch data from API
- getPath(): Observable<any> {
-  return this.http.get<any>(`${this.apiUrl}dijkstra/getpath`);
-}
 
-getShortestPath(fromNode: string, toNode: string): Observable<any> {
-  const params = new HttpParams()
-      .set('fromNode', fromNode)
-      .set('toNode', toNode);
-
-  return this.http.get<any>(`${this.apiUrl}dijkstra/GetShortestPath`, { params });
+GetShortestPath(favorite: any): Observable<any> {
+  return this.http.post(
+    `${environment.apiUrl}dijkstra/GetShortestPath`,
+    favorite
+  );
 }
 
 }
